@@ -34,7 +34,16 @@ class Game{
     players=[player1,player2];
 
     obstacleGroup = new Group();
-    
+
+    var obstaclePositions = [
+
+        {x:width /2 + 60, image: fruit1_img},
+        {x:width /2 + 120, image: fruit2_img},
+        {x:width /2 + 240, image: fruit3_img},
+        {x:width /2 + 480, image: fruit4_img},
+        {x:width /2 + 960, image: fruit4_img}
+    ];
+
         console.log(frameCount)
        
         }
@@ -116,6 +125,7 @@ class Game{
                  }
                  if(frameCount % 40 === 0){
                     //chame addObstacles()
+                    this.addObstacles();
                  }
                  
                   if (player.index !== null) {
@@ -133,6 +143,7 @@ class Game{
 
                       if(obstacleGroup.isTouching(players)){
                        //escreva o código para atribuir o valor de gameState a End (fim)
+                       gameState = 2;
                       }
                   }
                 }
@@ -162,11 +173,15 @@ class Game{
     }
 
 
-    addObstacles()
-    {       
+    addObstacles(obstacleGroup,numberOfobstacles,obstacleImage,positions = [])
+    {    
+        for(var i = 0; i < numberOfobstacles; i++){   
             var x, y;
             //escreva o código para criar um obstáculo na posição x aleatória.
-            
+            if (positions.length > 0) {
+                x = positions[i].x;
+                obstacleImage = positions[i].image
+            }
             
             y = 0
             var obstacle = createSprite(x, y);
@@ -175,4 +190,6 @@ class Game{
             obstacle.scale = 0.15;
             obstacleGroup.add(obstacle);
     }
+}
+ 
 }
